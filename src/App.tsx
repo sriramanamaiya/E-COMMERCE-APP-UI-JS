@@ -1,9 +1,11 @@
 import React from "react"
 
+import RouteComp from "./components/NavBar/RouteComp"
+
 const App: React.FC = () => {
     return (
         <div>
-            <h1>E-Commerce App</h1>
+            <RouteComp />
         </div>
     )
 }
