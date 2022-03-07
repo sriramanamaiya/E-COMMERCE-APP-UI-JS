@@ -5,8 +5,12 @@ import { Button } from "@mui/material"
 
 import { State } from "../../state/reducers/combineReducer"
 import { startUserLogin } from "../../state/actions/userActions"
+import { TabValue } from "../Reuseable/TabComp"
+import { startSupplierLogin } from "../../state/actions/supplierActions"
 
-const Login = () => {
+const Login = (props: TabValue) => {
+    const { tabName } = props
+    console.log(tabName)
     const dispatch = useDispatch()
 
     const state = useSelector((state: State) => {
@@ -22,7 +26,12 @@ const Login = () => {
         },
         onSubmit: (values) => {
             console.log('Login Data',values)
-            dispatch(startUserLogin(values))
+            if( tabName === 'Customer' ){
+                dispatch(startUserLogin(values))
+            }else{
+                console.log('Supplier Login',values)
+                dispatch(startSupplierLogin)
+            }
         }
     })
 

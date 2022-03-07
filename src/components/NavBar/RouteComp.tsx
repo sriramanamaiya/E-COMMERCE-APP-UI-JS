@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom"
 
 import Home from "../HomePage/Home"
 import Register from "../HomePage/Register"
-import TabPage from "../Reuseable/Tab"
+import TabPage from "../HomePage/TabPage"
 
 import NavBar from "./NavBar"
 
