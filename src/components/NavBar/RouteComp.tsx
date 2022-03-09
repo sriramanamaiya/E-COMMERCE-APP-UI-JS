@@ -2,7 +2,6 @@ import React from "react"
 import { Route, Switch } from "react-router-dom"
 
 import Home from "../HomePage/Home"
-import Register from "../HomePage/Register"
 import TabPage from "../HomePage/TabPage"
 
 import NavBar from "./NavBar"
@@ -15,7 +14,7 @@ const RouteComp : React.FC = () => {
             <Switch>
                 <Route path="/" component={Home} exact />
                 <Route path="/login" component={TabPage} />
-                <Route path="/register" component={Register} />
+                <Route path="/register" component={TabPage} />
             </Switch>
         </>
     )

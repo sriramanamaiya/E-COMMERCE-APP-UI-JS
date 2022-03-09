@@ -17,6 +17,7 @@ interface TabType {
 const TabComp = (props: TabType) => {
     const { initialValue, tabPanelValueOne, tabPanelValueTwo , ComponentOne, ComponentTwo } = props
     const [ tabName, settabName ] = useState(initialValue)
+    console.log(initialValue, tabPanelValueOne, tabPanelValueTwo)
 
     const handleChange = (e: any, value: string) => {
         settabName(value)

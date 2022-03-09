@@ -15,4 +15,24 @@ const startSupplierLogin = (data: LoginData) => {
     }
 }
 
-export { startSupplierLogin }
+interface RegisterData {
+    name: string
+    email: string
+    password: string
+    phoneNumber: string
+}
+
+const startSupplierRegister = (data: RegisterData) => {
+    return (dispatch: Dispatch) => {
+        axios
+            .post('/api/suppliers', data)
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+}
+
+export { startSupplierLogin, startSupplierRegister }
