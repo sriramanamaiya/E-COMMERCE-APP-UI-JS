@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useFormik } from "formik"
 import { Button } from "@mui/material"
 
-import { State } from "../../state/reducers/combineReducer"
+import { TypeOfState } from "../../state/reducers/combineReducer"
 import { startUserLogin } from "../../state/actions/userActions"
 import { TabValue } from "../Reuseable/TabComp"
 import { startSupplierLogin } from "../../state/actions/supplierActions"
@@ -12,7 +12,7 @@ const Login = (props: TabValue) => {
     const { tabName } = props
     const dispatch = useDispatch()
 
-    const state = useSelector((state: State) => {
+    const state = useSelector((state: TypeOfState) => {
         return state.users
     })
 

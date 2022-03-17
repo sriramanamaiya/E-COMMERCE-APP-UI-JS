@@ -4,12 +4,13 @@ import * as yup from 'yup'
 
 import InputField from "../Reuseable/InputField"
 
-const Register = () => {
+const SupplierRegisterEdit = () => {
     const validationSchema  = yup.object({
         name: yup.string().required('Name Cannot be Blank'),
         email : yup.string().email('Invalid Email-ID').required('Email-ID Cannot Be Blank'),
         password: yup.string().min(8, 'Password is too Short').max(128).required('Password Cannot be Blank'),
-        phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required')
+        phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required'),
+        companyName: yup.string().required('Company Name is Required')
     })
 
     const { values, handleChange, handleSubmit, errors, touched, handleBlur } = useFormik({
@@ -17,7 +18,9 @@ const Register = () => {
             name: '',
             email: '',
             password: '',
-            phoneNumber: ''
+            phoneNumber: '',
+            companyName: '',
+            companyWebsite: ''
         },
         validationSchema,
         validateOnChange: false,
@@ -77,9 +80,31 @@ const Register = () => {
                 inputError={errors.phoneNumber && touched.phoneNumber ? true : false}
                 inputHelperText={errors.phoneNumber && touched.phoneNumber ? errors.phoneNumber : ''}
             />
+
+            <InputField 
+                inputType="text" 
+                inputName="companyName" 
+                inputlabel="Company Name" 
+                inputValue={values.companyName} 
+                inputHandleChange={handleChange} 
+                inputHandleBlur={handleBlur}
+                inputRequired={true} 
+                inputError={errors.companyName && touched.companyName ? true : false}
+                inputHelperText={errors.companyName && touched.companyName ? errors.companyName : ''}
+            />
+
+            <InputField 
+                inputType="text" 
+                inputName="companyWebsite" 
+                inputlabel="Company Website" 
+                inputValue={values.companyWebsite} 
+                inputHandleChange={handleChange} 
+                inputHandleBlur={handleBlur}
+                inputRequired={true} 
+            />
             <Button variant="contained" type="submit" >Submit</Button>
         </form>
     )
 }
 
-export default Register
+export default SupplierRegisterEdit

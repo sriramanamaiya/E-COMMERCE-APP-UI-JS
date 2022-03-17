@@ -7,4 +7,4 @@ const combineReducer = combineReducers({
 
 export default combineReducer
 
-export type State = ReturnType<typeof combineReducer>
+export type TypeOfState = ReturnType<typeof combineReducer>

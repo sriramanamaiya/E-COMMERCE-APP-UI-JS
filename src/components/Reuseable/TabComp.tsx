@@ -6,7 +6,7 @@ export interface TabValue {
     tabName :string
 }
 
-interface TabType {
+interface TabPropsType {
     initialValue: string
     tabPanelValueOne: string
     tabPanelValueTwo: string
@@ -14,7 +14,7 @@ interface TabType {
     ComponentTwo: React.FC<TabValue>
 }
 
-const TabComp = (props: TabType) => {
+const TabComp = (props: TabPropsType) => {
     const { initialValue, tabPanelValueOne, tabPanelValueTwo , ComponentOne, ComponentTwo } = props
     const [ tabName, settabName ] = useState(initialValue)
     console.log(initialValue, tabPanelValueOne, tabPanelValueTwo)

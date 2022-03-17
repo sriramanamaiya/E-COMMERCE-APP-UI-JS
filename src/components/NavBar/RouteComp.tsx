@@ -1,10 +1,9 @@
 import React from "react"
 import { Route, Switch } from "react-router-dom"
 
+import NavBar from "./NavBar"
 import Home from "../HomePage/Home"
 import TabPage from "../HomePage/TabPage"
-
-import NavBar from "./NavBar"
 
 const RouteComp : React.FC = () => {
 
