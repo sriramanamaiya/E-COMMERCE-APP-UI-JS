@@ -1,4 +1,5 @@
-import { RegisterData, SupplierLogin } from '../models/supplier.interface'
+import { RegisterData } from '../models/supplier.interface'
+import { jwtCustomType } from '../actions/supplierActions'
 import { SupplierTypes } from './actionsTypes'
 
 interface RegisterType {
@@ -8,7 +9,7 @@ interface RegisterType {
 
 interface LoginType {
     type: SupplierTypes.LOGIN
-    payload: SupplierLogin
+    payload: jwtCustomType
 }
 
 interface Error {

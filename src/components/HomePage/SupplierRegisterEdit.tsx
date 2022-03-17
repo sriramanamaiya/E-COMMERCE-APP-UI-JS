@@ -1,21 +1,27 @@
 import { useFormik } from "formik"
 import { Button } from "@mui/material"
 import * as yup from 'yup'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom"
 
 import InputField from "../Reuseable/InputField"
 import { startSupplierRegister } from "../../state/actions/supplierActions"
+import { useEffect } from "react"
+import { TypeOfState } from "../../state/reducers/combineReducer"
 
 const SupplierRegisterEdit = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const error = useSelector((state: TypeOfState) => {
+        return state.supplier.errors
+    })
+
     const validationSchema  = yup.object({
         name: yup.string().required('Name Cannot be Blank'),
         email : yup.string().email('Invalid Email-ID').required('Email-ID Cannot Be Blank'),
         password: yup.string().min(8, 'Password is too Short').max(128).required('Password Cannot be Blank'),
-        phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required'),
+        phoneNumber: yup.string().min(10,'Min 10 digits number is Required').max(10).required('Phone Number is Required'),
         // companyName: yup.string().required('Company Name is Required')
     })
 
@@ -23,7 +29,7 @@ const SupplierRegisterEdit = () => {
         history.push('/login')
     }
 
-    const { values, handleChange, handleSubmit, errors, touched, handleBlur } = useFormik({
+    const { values, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues : {
             name: '',
             email: '',
@@ -38,6 +44,10 @@ const SupplierRegisterEdit = () => {
             dispatch(startSupplierRegister(values, redirect))
         }
     })
+
+    useEffect(() => {
+        setErrors(error)
+    },[error,setErrors])
 
     console.log('Errors', errors)
 

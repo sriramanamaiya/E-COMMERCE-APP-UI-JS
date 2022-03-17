@@ -8,14 +8,18 @@ const supplierInitialState: supplierState = {
     errors: {}
 }
 
-const supplierReducsr = (state: supplierState = supplierInitialState, action: Action) => {
+const supplierReducer = (state: supplierState = supplierInitialState, action: Action) => {
     switch (action.type) {
         case SupplierTypes.ERROR: {
-            let result: any
-            for (const key in action.payload) {
-                result = { ...result, [key]: action.payload[key].message }
+            if (action.payload.hasOwnProperty('errors')) {
+                return { ...state, errors: { ...action.payload } }
+            } else {
+                let result: any
+                for (const key in action.payload) {
+                    result = { ...result, [key]: action.payload[key].message }
+                }
+                return { ...state, errors: result }
             }
-            return { ...state, errors: result }
         }
         case SupplierTypes.LOGIN: {
             return { ...state, data: { ...action.payload } }
@@ -26,4 +30,4 @@ const supplierReducsr = (state: supplierState = supplierInitialState, action: Ac
     }
 }
 
-export default supplierReducsr
+export default supplierReducer

@@ -11,11 +11,15 @@ const userInitialState = {
 const userReducer = (state: userState = userInitialState, action: Action): userState => {
     switch (action.type) {
         case UserTypes.ERROR: {
-            let result: any
-            for (const key in action.payload) {
-                result = { ...result, [key]: action.payload[key].message }
+            if (action.payload.hasOwnProperty('errors')) {
+                return { ...state, errors: { ...action.payload } }
+            } else {
+                let result: any
+                for (const key in action.payload) {
+                    result = { ...result, [key]: action.payload[key].message }
+                }
+                return { ...state, errors: result }
             }
-            return { ...state, errors: result }
         }
         case UserTypes.LOGIN: {
             console.log('Reducer', action.payload)

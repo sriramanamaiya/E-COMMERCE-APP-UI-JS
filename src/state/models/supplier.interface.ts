@@ -11,10 +11,6 @@ export interface supplierState {
     errors: {}
 }
 
-export interface SupplierLogin {
-    token: string
-}
-
 export interface LoginData {
     email: string
     password: string

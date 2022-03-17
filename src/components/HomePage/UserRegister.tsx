@@ -9,7 +9,7 @@ import InputField from "../Reuseable/InputField"
 import { startUserRegister } from "../../state/actions/userActions"
 import { TypeOfState } from "../../state/reducers/combineReducer"
 
-const Register = () => {
+const UserRegister = () => {
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -103,4 +103,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default UserRegister

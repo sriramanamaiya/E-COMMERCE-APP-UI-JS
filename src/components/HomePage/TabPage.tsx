@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom"
 
 import TabComp from "../Reuseable/TabComp"
 import Login from "./Login"
-import Register from "./Register"
+import UserRegister from "./UserRegister"
 import SupplierRegisterEdit from "./SupplierRegisterEdit"
 
 const TabPage : React.FC<RouteComponentProps> = (props) => {
@@ -31,7 +31,7 @@ const TabPage : React.FC<RouteComponentProps> = (props) => {
 
                         tabPanelValueOne="Customer" 
                         tabPanelValueTwo="Supplier" 
-                        ComponentOne={Register} 
+                        ComponentOne={UserRegister} 
                         ComponentTwo={SupplierRegisterEdit} 
                     />
                 ) }
