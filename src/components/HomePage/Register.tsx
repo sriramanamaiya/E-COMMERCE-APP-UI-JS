@@ -1,18 +1,34 @@
 import { useFormik } from "formik"
 import { Button } from "@mui/material"
 import * as yup from 'yup'
+import { useDispatch, useSelector } from "react-redux"
+import { useHistory } from "react-router-dom"
+import { useEffect } from "react"
 
 import InputField from "../Reuseable/InputField"
+import { startUserRegister } from "../../state/actions/userActions"
+import { TypeOfState } from "../../state/reducers/combineReducer"
 
 const Register = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const error = useSelector((state: TypeOfState) => {
+        return state.users.errors
+    })
+
     const validationSchema  = yup.object({
         name: yup.string().required('Name Cannot be Blank'),
         email : yup.string().email('Invalid Email-ID').required('Email-ID Cannot Be Blank'),
         password: yup.string().min(8, 'Password is too Short').max(128).required('Password Cannot be Blank'),
-        phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required')
+        // phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required')
     })
 
-    const { values, handleChange, handleSubmit, errors, touched, handleBlur } = useFormik({
+    const redirect = () => {
+        history.push('/login')
+    }
+
+    const { values, handleChange, handleSubmit, errors, setErrors, touched, handleBlur } = useFormik({
         initialValues : {
             name: '',
             email: '',
@@ -23,8 +39,13 @@ const Register = () => {
         validateOnChange: false,
         onSubmit: (values) => {
             console.log(values)
+            dispatch(startUserRegister(values, redirect))
         }
     })
+
+    useEffect(() => {
+        setErrors(error)
+    },[error, setErrors])
 
     console.log('Errors', errors)
 

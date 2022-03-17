@@ -1,17 +1,27 @@
 import { useFormik } from "formik"
 import { Button } from "@mui/material"
 import * as yup from 'yup'
+import { useDispatch } from "react-redux"
+import { useHistory } from "react-router-dom"
 
 import InputField from "../Reuseable/InputField"
+import { startSupplierRegister } from "../../state/actions/supplierActions"
 
 const SupplierRegisterEdit = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
     const validationSchema  = yup.object({
         name: yup.string().required('Name Cannot be Blank'),
         email : yup.string().email('Invalid Email-ID').required('Email-ID Cannot Be Blank'),
         password: yup.string().min(8, 'Password is too Short').max(128).required('Password Cannot be Blank'),
         phoneNumber: yup.string().min(10,'Enter 10 digits Number').max(10).required('Phone Number is Required'),
-        companyName: yup.string().required('Company Name is Required')
+        // companyName: yup.string().required('Company Name is Required')
     })
+
+    const redirect = () => {
+        history.push('/login')
+    }
 
     const { values, handleChange, handleSubmit, errors, touched, handleBlur } = useFormik({
         initialValues : {
@@ -25,7 +35,7 @@ const SupplierRegisterEdit = () => {
         validationSchema,
         validateOnChange: false,
         onSubmit: (values) => {
-            console.log(values)
+            dispatch(startSupplierRegister(values, redirect))
         }
     })
 
@@ -100,7 +110,6 @@ const SupplierRegisterEdit = () => {
                 inputValue={values.companyWebsite} 
                 inputHandleChange={handleChange} 
                 inputHandleBlur={handleBlur}
-                inputRequired={true} 
             />
             <Button variant="contained" type="submit" >Submit</Button>
         </form>

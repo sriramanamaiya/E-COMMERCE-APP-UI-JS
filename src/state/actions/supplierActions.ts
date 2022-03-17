@@ -1,13 +1,16 @@
 import axios from 'axios'
 import { Dispatch } from 'redux'
-import { LoginData } from '../action-types/userActions'
+import { RegisterData, SupplierLogin } from '../models/supplier.interface'
+import { LoginData } from '../models/user.interface'
+import { SupplierTypes } from '../action-types/actionsTypes'
+import { apiError } from './userActions'
 
 const startSupplierLogin = (data: LoginData) => {
     return (dispatch: Dispatch) => {
         axios
             .post('/api/suppliers/login', data)
             .then((response) => {
-                console.log(response.data)
+                dispatch(supplierLogin(response.data))
             })
             .catch((error) => {
                 console.log(error)
@@ -15,19 +18,24 @@ const startSupplierLogin = (data: LoginData) => {
     }
 }
 
-interface RegisterData {
-    name: string
-    email: string
-    password: string
-    phoneNumber: string
+const supplierLogin = (data: SupplierLogin) => {
+    return {
+        type: SupplierTypes.LOGIN,
+        payload: data
+    }
 }
 
-const startSupplierRegister = (data: RegisterData) => {
+const startSupplierRegister = (data: RegisterData, redirect: () => void) => {
     return (dispatch: Dispatch) => {
         axios
             .post('/api/suppliers', data)
             .then((response) => {
-                console.log(response.data)
+                const result = response.data
+                if (result.hasOwnProperty('errors')) {
+                    dispatch(apiError(result.errors))
+                } else {
+                    redirect()
+                }
             })
             .catch((error) => {
                 console.log(error)

@@ -1,26 +1,9 @@
-import { UserTypes } from './userTypes'
-
-export interface UserObject {
-    id: string
-    name: string
-    email: string
-    password: string
-    phoneNumber: string
-    isAdmin: Boolean
-}
-
-export interface UserLogin {
-    token: string
-}
-
-export interface LoginData {
-    email: string
-    password: string
-}
+import { UserTypes } from './actionsTypes'
+import { UserLogin, RegisteredUserData } from '../models/user.interface'
 
 interface RegisterType {
     type: UserTypes.REGISTER
-    payload: UserObject
+    payload: RegisteredUserData
 }
 
 interface LoginType {
@@ -28,4 +11,13 @@ interface LoginType {
     payload: UserLogin
 }
 
-export type Action = LoginType | RegisterType
+interface Error {
+    [prop: string]: { message: string }
+}
+
+interface ErrorType {
+    type: UserTypes.ERROR
+    payload: Error
+}
+
+export type Action = LoginType | RegisterType | ErrorType

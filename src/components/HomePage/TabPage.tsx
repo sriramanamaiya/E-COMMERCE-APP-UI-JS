@@ -19,7 +19,6 @@ const TabPage : React.FC<RouteComponentProps> = (props) => {
         <>
             { path ===  TabTypeValue.LOGIN ? (
                 <TabComp 
-                    initialValue="Customer" 
                     tabPanelValueOne="Customer" 
                     tabPanelValueTwo="Supplier" 
                     ComponentOne={Login} 
@@ -29,9 +28,9 @@ const TabPage : React.FC<RouteComponentProps> = (props) => {
                 <>
                     { path === TabTypeValue.REGISTER && (
                         <TabComp 
-                        initialValue="Customer Register" 
-                        tabPanelValueOne="Customer Register" 
-                        tabPanelValueTwo="Supplier Register" 
+
+                        tabPanelValueOne="Customer" 
+                        tabPanelValueTwo="Supplier" 
                         ComponentOne={Register} 
                         ComponentTwo={SupplierRegisterEdit} 
                     />

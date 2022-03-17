@@ -1,24 +1,23 @@
-import { Action } from '../action-types/userActions'
-import { userState } from '../models/user.interface'
-import { UserTypes } from '../action-types/actionsTypes'
+import { SupplierTypes } from '../action-types/actionsTypes'
+import { Action } from '../action-types/supplierActions'
+import { supplierState } from '../models/supplier.interface'
 
-const userInitialState = {
+const supplierInitialState: supplierState = {
     isLoading: false,
     data: {},
     errors: {}
 }
 
-const userReducer = (state: userState = userInitialState, action: Action): userState => {
+const supplierReducsr = (state: supplierState = supplierInitialState, action: Action) => {
     switch (action.type) {
-        case UserTypes.ERROR: {
+        case SupplierTypes.ERROR: {
             let result: any
             for (const key in action.payload) {
                 result = { ...result, [key]: action.payload[key].message }
             }
             return { ...state, errors: result }
         }
-        case UserTypes.LOGIN: {
-            console.log('Reducer', action.payload)
+        case SupplierTypes.LOGIN: {
             return { ...state, data: { ...action.payload } }
         }
         default: {
@@ -27,4 +26,4 @@ const userReducer = (state: userState = userInitialState, action: Action): userS
     }
 }
 
-export default userReducer
+export default supplierReducsr

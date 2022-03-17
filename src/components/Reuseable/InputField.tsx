@@ -8,7 +8,7 @@ interface InputFieldType {
     inputName: string
     inputValue: string
     inputHandleChange: ChangeEventHandler
-    inputRequired: boolean
+    inputRequired?: boolean
     inputError?: boolean
     inputHelperText?: string
     inputHandleBlur?: FocusEventHandler
