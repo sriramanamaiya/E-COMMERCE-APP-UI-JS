@@ -17,7 +17,7 @@ const startUserLogin = (data: LoginData) => {
                 } else {
                     const tokenData = jwtDecode<jwtCustomType>(result.token)
                     localStorage.setItem('token', result.token)
-                    localStorage.setItem('admin', String(tokenData.isAdmin))
+                    localStorage.setItem('admin', JSON.stringify(tokenData.isAdmin))
                     dispatch(Login(tokenData))
                 }
             })
@@ -27,7 +27,7 @@ const startUserLogin = (data: LoginData) => {
     }
 }
 
-const Login = (data: JwtPayload) => {
+const Login = (data: jwtCustomType | {}) => {
     return {
         type: UserTypes.LOGIN,
         payload: data

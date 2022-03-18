@@ -28,7 +28,7 @@ const startSupplierLogin = (data: LoginData) => {
     }
 }
 
-const supplierLogin = (data: jwtCustomType) => {
+const supplierLogin = (data: jwtCustomType | {}) => {
     return {
         type: SupplierTypes.LOGIN,
         payload: data
@@ -60,4 +60,4 @@ const apiError = (data: any) => {
     }
 }
 
-export { startSupplierLogin, startSupplierRegister }
+export { supplierLogin, startSupplierLogin, startSupplierRegister }
